@@ -15,13 +15,13 @@ namespace repetition {
     public:
         linearlist(/* args */);
         ~linearlist();
-        bool empty() ;
-        int size();
-        T& get(int theIndex);
-        int indexOf(const T& theElement);
-        void erase(int theIndex);
-        void insert(int theIndex, const T& theElement);
-        void output(std::ostream& out);
+        virtual bool empty() ;
+        virtual int size();
+        virtual T& get(int theIndex);
+        virtual int indexOf(const T& theElement);
+        virtual void erase(int theIndex);
+        virtual void insert(int theIndex, const T& theElement);
+        virtual void output(std::ostream& out);
     };
 }
 #endif //DATASTRUCTURE_LINEARLIST_H

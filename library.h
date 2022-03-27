@@ -1,6 +1,0 @@
-#ifndef DATASTRUCTURE_LIBRARY_H
-#define DATASTRUCTURE_LIBRARY_H
-
-void hello();
-
-#endif //DATASTRUCTURE_LIBRARY_H
