@@ -3,5 +3,4 @@ project(datastructure)
 
 set(CMAKE_CXX_STANDARD 14)
 add_subdirectory(linearlist)
-add_library(datastructure MyExceptions.h)
-include_directories(linearlist)
+add_subdirectory(linkedList)

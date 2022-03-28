@@ -6,12 +6,7 @@
 #define DATASTRUCTURE_ARRAYLIST_H
 
 #include"linearList.h"
-#include "sstream"
-#include <exception>
-#include <iterator>
-#include <algorithm>
-#include "changeLength1D.h"
-#include "../MyExceptions.h"
+
 namespace repetition{
 template<class T>
 class arrayList : public linearlist<T>
@@ -93,7 +88,52 @@ public:
     //内部类，迭代器，可以随机访问
     class iterator
     {
+    public:
+        typedef bidirectional_iterator_tag iterator_category;
+        typedef T value_type;
+        typedef std::ptrdiff_t difference_type;
+        typedef T* pointer;
+        typedef T& reference;
+        //构造函数
+        iterator(T* thePosition = 0) { position = thePosition;}
 
+        //解引用操作符
+        T& operator*() const {return *position;}
+        T* operator->() const {return &*position;}
+
+        //迭代器的值增加
+        iterator& operator++()//前加
+        {
+            ++position;return *this;
+        }
+        iterator operator++(int)//后加
+        {
+            iterator old = *this;
+            ++position;
+            return old;
+        }
+        //迭代器的值减少
+        iterator& operator--()//前减
+        {
+            --position;return *this;
+        }
+        iterator operator--(int)//后减
+        {
+            iterator old = *this;
+            --position;
+            return old;
+        }
+        //测试是否相等
+        bool operator!=(const iterator right) const{
+            return position!=right.position;
+        }
+        bool operator==(const iterator right) const{
+            return position==right.position;
+        }
+        //iterator begin(){return iterator(element);}
+
+    protected:
+        T* position; //指向表元素的指针
     };
 
 };
@@ -105,7 +145,7 @@ arrayList<T>::arrayList(int initialCapacity)
     {
         std::ostringstream s;
         s<<"Initial capacity = " <<initialCapacity<< " must Be >0";
-        throw s.str();
+        throw illegalParameterValue(s.str());
     }
     arrayLength = initialCapacity;
     element = new T[arrayLength];
@@ -117,7 +157,7 @@ void arrayList<T>::checkIndex(int theIndex) const {
     if(theIndex<0  || theIndex>=listSize) {
         std::ostringstream s;
         s << "index = " << theIndex << "size = " << listSize;
-        throw s.str();
+        throw illegalIndex(s.str());
     }
 }
 
@@ -178,6 +218,12 @@ void arrayList<T>::checkIndex(int theIndex) const {
     void arrayList<T>::output(std::ostream &out) const {
         //把线性表插入输出流
         std::copy(element,element+listSize,std::ostream_iterator<T>(out," "));
+    }
+
+    template<class T>
+    int arrayList<T>::lastIndex(const T &theElement) const {
+
+        return 0;
     }
     //
 }

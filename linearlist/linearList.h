@@ -6,6 +6,12 @@
 #define DATASTRUCTURE_LINEARLIST_H
 
 #include "ostream"
+#include "sstream"
+#include <exception>
+#include <iterator>
+#include <algorithm>
+#include "changeLength1D.h"
+#include "../MyExceptions.h"
 namespace repetition {
     template<class T>
     class linearlist
