@@ -1,8 +1,11 @@
 #include <iostream>
+#include <ostream>
 #include "chain.h"
 
-using namespace std;
-
+///using namespace std;
+using std::cout;
+using std::endl;
+namespace repition{
 int main(){
     chain<int> numChain1, numChain2;
     for(int i = 0; i < 20; ++i){
@@ -32,4 +35,7 @@ int main(){
     numChain1.reverse();
     cout << "numChain1.reverse(): " << numChain1 << endl;
     return 0;
+}
+
+
 }

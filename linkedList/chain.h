@@ -4,5 +4,10 @@
 
 #ifndef DATASTRUCTURE_CHAIN_H
 #define DATASTRUCTURE_CHAIN_H
+namespace repition{
+    template<typename T>
+    class chain{
 
+    };
+}
 #endif //DATASTRUCTURE_CHAIN_H
