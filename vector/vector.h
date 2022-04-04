@@ -32,6 +32,8 @@ namespace repition{
          * */
         int find(const T& theElement,int lo,int hi);//查找元素，返回
         int search(const T& theElement,int lo,int hi) const;//查找元素theElement，适用于有序向量的版本
+        int binSearch(const T& theElement,int lo,int hi) const;//二分查找
+        int fibSearcha(const T& theElement,int lo,int hi) const;//fib查找
         void deduplicat();//剔除重复元素，适用于向量
         int uniquify() ;//剔除重复元素，适用于有序向量
         void travers() ;//遍历向量并统一处理所有的元素，处理方法有函数对象指定
@@ -195,6 +197,50 @@ namespace repition{
     int Vector<T>::search(const T &theElement ,int lo, int hi) const {
         //为便于有序向量自身的维护，应返回不大于e的最后一个元素
         return (rand()%2) ?  binSearch(theElement,lo,hi) : fibSearch(theElement,lo,hi);
+    }
+
+    template<typename T>
+    int Vector<T>::binSearch(const T &theElement, int lo, int hi) const {
+        /*while(1<lo-hi)//有效查找区间的宽度缩短至1时，算法才会终止
+        {
+            int mid=(lo+hi)>>1;
+            /*
+            if(theElement<element[mid]) hi=mid;
+            else if(element[mid]<theElement) lo=mid+1;
+            else return mid;
+             */
+        /*
+            //版本B，通过将中间的点包含进后一个区间，使得只有两个分支，因此向左向右的所需的比较数可以相等，但是
+            (theElement<element[mid] ) ? hi = mid : lo=mid;
+        }
+        return (theElement == element[lo]) ? lo : -1;//相比上一版本，次版本各种情况下的SL更加接近，整体性能更加稳定
+        //return -1;//查找失败
+        */
+        //版本3
+        while(lo<hi){//查找区间宽度重新变为0时，算法才结束
+            int mid=(lo+hi)>>1;
+            theElement<element[mid] ? hi=mid : lo=mid+1;
+        }
+        return lo-1;
+    }
+
+    template<typename T>
+    int Vector<T>::fibSearcha(const T &theElement, int lo, int hi) const {
+        Fib fib(hi-lo);//用O(logn) = log(hi-lo)时间创建fib数列
+        while(lo<hi)
+            while(hi-lo< fib.get())  fib.prev(); //至多迭代几次
+                //通过向前查找，确定形如fiber（k）-1的轴点
+                int mid = lo+ fib.get() -1;
+                if(theElement<element[mid]) hi=mid;
+                else if(element[mid]<theElement) lo=mid+1;
+                else return mid;
+
+        return -1;
+    }
+
+    template<typename T>
+    void Vector<T>::sort() {
+
     }
 }
 #endif //DATASTRUCTURE_VECTOR_H
